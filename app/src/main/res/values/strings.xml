@@ -6,4 +6,7 @@
     <string name="forgot_pass">Forgot password ?</string>
     <string name="OR">OR</string>
     <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
