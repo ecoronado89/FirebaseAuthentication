@@ -8,4 +8,5 @@
     <item name="login_btn_login" type="id"/>
     <item name="forgot_password" type="id"/>
     <item name="login_layout" type="id"/>
+    <item name="login_btn_signup" type="id"/>
 </resources>
