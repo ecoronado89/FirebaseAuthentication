@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="icon" type="id"/>
+    <item name="login_input_email" type="id"/>
+    <item name="login_email" type="id"/>
+    <item name="login_input_password" type="id"/>
+    <item name="login_pass" type="id"/>
+    <item name="login_btn_login" type="id"/>
+    <item name="forgot_password" type="id"/>
+    <item name="login_layout" type="id"/>
+</resources>
