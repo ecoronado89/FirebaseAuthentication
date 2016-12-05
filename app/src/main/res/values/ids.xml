@@ -38,6 +38,8 @@
     <item name="corner_4" type="id"/>
 
     <item name="button_holder" type="id"/>
+    <item name="messages_list" type="id"/>
+    <item name="message" type="id"/>
 
 
 </resources>
