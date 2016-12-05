@@ -37,5 +37,7 @@
     <item name="corner_3" type="id"/>
     <item name="corner_4" type="id"/>
 
+    <item name="button_holder" type="id"/>
+
 
 </resources>
