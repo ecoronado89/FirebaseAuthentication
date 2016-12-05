@@ -128,22 +128,22 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)nameView.getLayoutParams();
 
-//            int sdk = Build.VERSION.SDK_INT;
-//            if (message.getSender().equals(mSender)){
-//                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
-//                } else{
-//                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_right_green));
-//                }
-//                layoutParams.gravity = Gravity.RIGHT;
-//            }else{
-//                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    nameView.setBackground(getDrawable(R.drawable.bubble_left_gray));
-//                } else{
-//                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_left_gray));
-//                }
-//                layoutParams.gravity = Gravity.LEFT;
-//            }
+            int sdk = Build.VERSION.SDK_INT;
+            if (message.getSender().equals(mSender)){
+                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
+                    nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
+                } else{
+                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_right_green));
+                }
+                layoutParams.gravity = Gravity.RIGHT;
+            }else{
+                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
+                    nameView.setBackground(getDrawable(R.drawable.bubble_left_gray));
+                } else{
+                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_left_gray));
+                }
+                layoutParams.gravity = Gravity.LEFT;
+            }
 
             nameView.setLayoutParams(layoutParams);
 
