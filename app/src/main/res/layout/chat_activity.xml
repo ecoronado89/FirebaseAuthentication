@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:layout_gravity="bottom">
 
     <ListView
         android:id="@id/messages_list"
@@ -14,7 +15,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <EditText
             android:id="@+id/new_message"
@@ -23,7 +25,7 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/send_message"
-            android:text="Send"
+            android:text="@string/send_button"
             android:background="@color/primary_blue"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"

@@ -33,8 +33,8 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
     private ListView mListView;
     private String mConvoId;
     private MessageDataSource.MessagesListener mListener;
-    private String mSender = "Didier"; // Replace these values to the correct ones
-    private String mRecipient = "Eder";
+    private String mSender = "Eder"; // Replace these values to the correct ones
+    private String mRecipient = "Didier";
 
 
     @Override
