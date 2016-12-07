@@ -45,7 +45,7 @@
         >
 
         <EditText
-            android:id="@id/login_pass"
+            android:id="@id/sign_pass"
             android:hint="@string/enter_your_password"
             android:inputType="textPassword"
             android:maxLines="1"

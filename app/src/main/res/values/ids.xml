@@ -17,4 +17,5 @@
     <item name="confirm_pass" type="id"/>
     <item name="signup_input_name" type="id"/>
     <item name="login_name" type="id"/>
+    <item name="sign_pass" type="id"/>
 </resources>

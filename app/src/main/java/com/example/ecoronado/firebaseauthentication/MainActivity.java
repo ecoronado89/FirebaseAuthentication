@@ -27,14 +27,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth auth;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         btnLogin = (Button)findViewById(R.id.login_btn_login);
-        input_email = (EditText)findViewById(R.id.login_input_email);
-        input_password = (EditText)findViewById(R.id.login_input_password);
+        input_email = (EditText)findViewById(R.id.login_email);
+        input_password = (EditText)findViewById(R.id.login_pass);
         btnSignUp = (TextView)findViewById(R.id.login_btn_signup);
         btnForgotPass = (TextView)findViewById(R.id.forgot_password);
         activity_main = (RelativeLayout)findViewById(R.id.activity_main);
