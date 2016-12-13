@@ -10,9 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ecoronado.firebaseauthentication.Dashboard">
 
-    <TextView
-        android:text="Hola Mundo!!!"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+        android:id="@id/user"/>
+
+    <TextView
+        android:text="@string/sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user"
+        android:layout_alignParentRight="true"
+        android:id="@id/sign_out" />
 </RelativeLayout>

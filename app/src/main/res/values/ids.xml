@@ -18,4 +18,11 @@
     <item name="signup_input_name" type="id"/>
     <item name="login_name" type="id"/>
     <item name="sign_pass" type="id"/>
+    <item name="user" type="id"/>
+    <item name="sign_out" type="id"/>
+    <item name="forgot_pass" type="id"/>
+    <item name="forgot_input_email" type="id"/>
+    <item name="forgot_email" type="id"/>
+    <item name="forgot_btn_email" type="id"/>
+    <item name="btnBack" type="id"/>
 </resources>

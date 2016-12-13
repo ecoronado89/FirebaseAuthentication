@@ -14,4 +14,9 @@
     <string name="signup_success">Account successfully created! You can now Login.</string>
     <string name="login_error_message">Please make sure you enter an email address and password!</string>
     <string name="login_error_title">Error!</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="forgot_message">We just need your registered email to send your password reset instructions</string>
+    <string name="forgot_input">Enter your email</string>
+    <string name="send_email">Reset password</string>
+    <string name="back">Back</string>
 </resources>
