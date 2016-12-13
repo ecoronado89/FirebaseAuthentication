@@ -9,4 +9,9 @@
     <string name="register">Register</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="signup_error_message">Please make sure you enter an user and password!</string>
+    <string name="signup_error_title">Error!</string>
+    <string name="signup_success">Account successfully created! You can now Login.</string>
+    <string name="login_error_message">Please make sure you enter an email address and password!</string>
+    <string name="login_error_title">Error!</string>
 </resources>

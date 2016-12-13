@@ -61,5 +61,6 @@ public class SignUp extends AppCompatActivity {
                        }
                     }
                 });
+        startActivity(new Intent(SignUp.this, MainActivity.class));
     }
 }

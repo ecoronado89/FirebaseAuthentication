@@ -3,6 +3,7 @@ package com.example.ecoronado.firebaseauthentication;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,20 +67,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loginUser(String email, final String password) {
-        auth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            if(password.length() < 6){
-                                Snackbar snackBar = Snackbar.make(activity_main, "Password length must be over 6", Snackbar.LENGTH_SHORT);
-                                snackBar.show();
+        if(email.isEmpty() || password.isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(R.string.login_error_message)
+                    .setTitle(R.string.login_error_title)
+                    .setPositiveButton(android.R.string.ok, null);
+            AlertDialog dialog  = builder.create();
+            dialog.show();
+        }else {
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                if (password.length() < 6) {
+                                    Snackbar snackBar = Snackbar.make(activity_main, "Password length must be over 6", Snackbar.LENGTH_SHORT);
+                                    snackBar.show();
+                                }
+                            } else {
+                                startActivity(new Intent(MainActivity.this, Dashboard.class));
                             }
                         }
-                        else{
-                            startActivity(new Intent(MainActivity.this, Dashboard.class));
-                        }
-                    }
-                });
+                    });
+        }
     }
 }
