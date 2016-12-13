@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="icon" type="id"/>
+    <item name="login_input_email" type="id"/>
+    <item name="login_email" type="id"/>
+    <item name="login_input_password" type="id"/>
+    <item name="login_pass" type="id"/>
+    <item name="login_btn_login" type="id"/>
+    <item name="forgot_password" type="id"/>
+    <item name="login_layout" type="id"/>
+    <item name="login_btn_signup" type="id"/>
+    <item name="signup_input_email" type="id"/>
+    <item name="signup_email" type="id"/>
+    <item name="signup_input_password" type="id"/>
+    <item name="signup_btn_register" type="id"/>
+    <item name="signup_input_confirm_password" type="id"/>
+    <item name="confirm_pass" type="id"/>
+    <item name="signup_input_name" type="id"/>
+    <item name="login_name" type="id"/>
+    <item name="sign_pass" type="id"/>
+</resources>
