@@ -3,6 +3,7 @@
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="login">Login</string>
+    <string name="submit">Submit</string>
     <string name="forgot_pass">Forgot password ?</string>
     <string name="OR">OR</string>
     <string name="sign_up">Sign Up</string>

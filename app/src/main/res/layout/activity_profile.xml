@@ -10,24 +10,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ecoronado.firebaseauthentication.Profile">
 
-    <ImageView
+    <!--<ImageView
         android:id="@id/icon"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/add_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        />
+        />-->
+    <ImageButton
+        android:id="@id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add_photo"
+        android:scaleType="centerCrop"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@id/icon"
+        android:layout_below="@id/imageButton"
         android:id="@id/signup_input_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <EditText
-            android:id="@id/login_email"
+            android:id="@id/login_name"
             android:hint="@string/enter_your_name"
             android:inputType="textCapWords"
             android:maxLines="1"
@@ -39,8 +47,8 @@
 
     <Button
         android:layout_below="@id/signup_input_name"
-        android:id="@id/login_btn_login"
-        android:text="@string/login"
+        android:id="@id/btnSubmit"
+        android:text="@string/submit"
         android:background="@color/loginBtn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"

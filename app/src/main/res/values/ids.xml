@@ -25,4 +25,6 @@
     <item name="forgot_email" type="id"/>
     <item name="forgot_btn_email" type="id"/>
     <item name="btnBack" type="id"/>
+    <item name="imageButton" type="id"/>
+    <item name="btnSubmit" type="id"/>
 </resources>

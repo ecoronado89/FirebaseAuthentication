@@ -8,12 +8,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Dashboard extends AppCompatActivity {
 
     TextView btnSignOut;
     EditText username;
     private FirebaseAuth user;
+    private DatabaseReference databaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +29,25 @@ public class Dashboard extends AppCompatActivity {
         btnSignOut = (TextView)findViewById(R.id.sign_out);
         username = (EditText)findViewById(R.id.user);
         user = FirebaseAuth.getInstance();
+        databaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        if(user.getCurrentUser() != null)
-            username.setText("Welcome, "+user.getCurrentUser().getEmail());
+        if(user.getCurrentUser() != null){
+            databaseUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                   String name = dataSnapshot.child("username").getValue(String.class);
+                    username.setText(name);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+           // username.setText("Welcome, "+user.getCurrentUser().getDisplayName());
+
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
