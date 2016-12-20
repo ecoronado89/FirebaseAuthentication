@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
@@ -21,7 +23,9 @@ public class SignUp extends AppCompatActivity {
     EditText input_email, input_pass, input_confirmPass, input_name;
     RelativeLayout activity_sign_up;
 
-    private FirebaseAuth auth;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseUsers;
+
     Snackbar snackbar;
 
     @Override
@@ -36,18 +40,22 @@ public class SignUp extends AppCompatActivity {
         input_name = (EditText)findViewById(R.id.login_name);
         activity_sign_up = (RelativeLayout)findViewById(R.id.activity_sign_up);
 
-        auth = FirebaseAuth.getInstance();
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+
+
+                btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUpUser(input_email.getText().toString(), input_pass.getText().toString());
+                String userId = mAuth.getCurrentUser().getUid();
+                signUpUser(input_email.getText().toString(), input_pass.getText().toString(), userId);
             }
         });
     }
 
-    private void signUpUser(String email, String pass) {
-        auth.createUserWithEmailAndPassword(email, pass)
+    private void signUpUser(String email, String pass, String userId) {
+        mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -59,6 +67,7 @@ public class SignUp extends AppCompatActivity {
                            snackbar = Snackbar.make(activity_sign_up, "Registration was success", Snackbar.LENGTH_SHORT);
                            snackbar.show();
                        }
+
                     }
                 });
         startActivity(new Intent(SignUp.this, MainActivity.class));
