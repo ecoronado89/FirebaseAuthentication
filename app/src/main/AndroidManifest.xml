@@ -29,6 +29,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ContactListActivity" />
         </activity>
+        <activity android:name=".Dashboard" />
+        <activity android:name=".ForgotPass" />
+        <activity android:name=".SignUp"></activity>
+        <activity android:name=".MainActivity$MainActivity" />
     </application>
 
 </manifest>

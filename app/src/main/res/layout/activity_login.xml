@@ -11,24 +11,25 @@
     tools:context="com.example.ecoronado.firebaseauthentication.MainActivity">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@id/icon"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/login"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+         />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/icon"
-        android:id="@+id/login_input_email"
+        android:layout_below="@id/icon"
+        android:id="@id/login_input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <EditText
-           android:id="@+id/login_email"
-            android:hint="Enter your email"
-            android:inputType="textCapWords"
+           android:id="@id/login_email"
+            android:hint="@string/enter_your_email"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -37,15 +38,15 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/login_input_email"
+        android:layout_below="@id/login_input_email"
         android:id="@+id/login_input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <EditText
-            android:id="@+id/login_pass"
-            android:hint="Enter your password"
+            android:id="@id/login_pass"
+            android:hint="@string/enter_your_password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:layout_width="match_parent"
@@ -53,5 +54,62 @@
 
         </EditText>
     </android.support.design.widget.TextInputLayout>
+    
+    <Button
+        android:layout_below="@id/login_input_password"
+        android:id="@id/login_btn_login"
+        android:text="@string/login"
+        android:background="@color/loginBtn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <TextView
+        android:layout_below="@id/login_btn_login"
+        android:id="@id/forgot_password"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:text="@string/forgot_pass"
+        android:textColor="@color/colorPrimary"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@id/login_layout"
+        android:layout_below="@id/forgot_password"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/loginLayout"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:padding="5dp"
+            android:text="@string/OR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/loginLayout"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@id/login_layout"
+        android:id="@id/login_btn_signup"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:text="@string/sign_up"
+        android:textColor="@color/colorPrimary"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
