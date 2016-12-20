@@ -33,7 +33,7 @@ public class ContactListActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.button_holder){
-            startActivity(new Intent(ContactListActivity.this,ChatActivity.class));
+            startActivity(new Intent(ContactListActivity.this,ChatListActivity.class));
             //finish();
         }
     }

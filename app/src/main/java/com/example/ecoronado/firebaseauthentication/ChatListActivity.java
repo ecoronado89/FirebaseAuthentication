@@ -2,8 +2,8 @@ package com.example.ecoronado.firebaseauthentication;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +24,7 @@ import java.util.Date;
  * Created by llbean on 12/4/16.
  */
 
-public class ChatActivity extends BaseActivity  implements View.OnClickListener,
+public class ChatListActivity extends BaseActivity  implements View.OnClickListener,
         MessageDataSource.MessagesCallbacks{
 
     private ArrayList<Message> mMessages;
@@ -35,8 +35,9 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
     private MessageDataSource.MessagesListener mListener;
     private String mSender = "Didier"; // Replace these values to the correct ones
     private String mRecipient = "Eder";
+    ChatListAdapter adapter;
 
-
+    RecyclerView rv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +47,10 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        mListView = (ListView)findViewById(R.id.messages_list);
+      //  mListView = (ListView)findViewById(R.id.messages_list);
         mMessages = new ArrayList<>();
-        mAdapter = new MessagesAdapter(mMessages);
-        mListView.setAdapter(mAdapter);
+     //   mAdapter = new MessagesAdapter(mMessages);
+       // mListView.setAdapter(mAdapter);
 
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
@@ -61,7 +62,28 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
         mConvoId = ids[0]+ids[1]+ids[2];
 
         mListener = MessageDataSource.addMessagesListener(mConvoId, this);
+
+//        super.onCreate(savedInstanceState);
+
+
+        rv =(RecyclerView)findViewById(R.id.rv);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+
+
+        adapter = new ChatListAdapter(this,mMessages);
+        rv.setAdapter(adapter);
+
+
     }
+
+
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,7 +98,7 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.chat_activity;
+        return R.layout.chat_list_activity;
     }
 
 
@@ -104,7 +126,8 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
     @Override
     public void onMessageAdded(Message message) {
         mMessages.add(message);
-        mAdapter.notifyDataSetChanged();
+        //rv.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -115,7 +138,7 @@ public class ChatActivity extends BaseActivity  implements View.OnClickListener,
 
     private class MessagesAdapter extends ArrayAdapter<Message> {
         MessagesAdapter(ArrayList<Message> messages){
-            super(ChatActivity.this, R.layout.message, R.id.message, messages);
+            super(ChatListActivity.this, R.layout.message, R.id.message, messages);
         }
 
 
