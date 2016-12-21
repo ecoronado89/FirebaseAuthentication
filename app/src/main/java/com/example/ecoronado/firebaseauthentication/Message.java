@@ -14,27 +14,27 @@ public class Message implements Parcelable {
     private String mSender;
     private Date mDate;
 
-    public String getmText() {
+    public String getText() {
         return mText;
     }
 
-    public void setmText(String mText) {
+    public void setText(String mText) {
         this.mText = mText;
     }
 
-    public String getmSender() {
+    public String getSender() {
         return mSender;
     }
 
-    public void setmSender(String mSender) {
+    public void setSender(String mSender) {
         this.mSender = mSender;
     }
 
-    public Date getmDate() {
+    public Date getDate() {
         return mDate;
     }
 
-    public void setmDate(Date mDate) {
+    public void setDate(Date mDate) {
         this.mDate = mDate;
     }
 

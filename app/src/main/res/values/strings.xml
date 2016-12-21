@@ -20,4 +20,5 @@
     <string name="forgot_input">Enter your email</string>
     <string name="send_email">Reset password</string>
     <string name="back">Back</string>
+    <string name="send_button">Send</string>
 </resources>

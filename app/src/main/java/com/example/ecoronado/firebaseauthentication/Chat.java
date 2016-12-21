@@ -1,68 +1,130 @@
 package com.example.ecoronado.firebaseauthentication;
 
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
-public class Chat extends AppCompatActivity {
+/**
+ * Created by llbean on 12/4/16.
+ */
 
-    ArrayList<Message> messages = new ArrayList<>();
-    private MessageAdapter adapter;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
-    Intent intent;
+public class Chat extends AppCompatActivity implements View.OnClickListener,
+        MessageDataSource.MessagesCallbacks{
 
+    private ArrayList<Message> mMessages;
+    private Utility mUtility = new Utility();
+    private MessageAdapter mAdapter;
+    private ListView mListView;
+    private String mConvoId;
+    private MessageDataSource.MessagesListener mListener;
+    private String mSender = "Didier"; // Replace these values to the correct ones
+    private String mRecipient = "Eder";
+    ChatListAdapter adapter;
+
+    RecyclerView rv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.chat_list_activity);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("colores");
+        // Handle menu icon
+     //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setHomeButtonEnabled(true);
 
-        //intent = new Intent(this, MaChat.class);
+        //  mListView = (ListView)findViewById(R.id.messages_list);
+        mMessages = new ArrayList<>();
+        //   mAdapter = new MessagesAdapter(mMessages);
+        // mListView.setAdapter(mAdapter);
 
-        messages.clear();
-        adapter = new MessageAdapter(this, messages);
+        Button sendMessage = (Button)findViewById(R.id.send_message);
+        sendMessage.setOnClickListener(this);
 
-        myRef.addValueEventListener(new ValueEventListener() {
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        // define this order base on alphabetic to keep the consistensy across the devices
+        String[] ids = {mRecipient,"-", mSender};
+        Arrays.sort(ids);
+        mConvoId = ids[0]+ids[1]+ids[2];
 
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    Message info = locationSnapshot.getValue(Message.class);
-                    messages.add(info);
-                }
-                adapter.notifyDataSetChanged();
-            }
+        mListener = MessageDataSource.addMessagesListener(mConvoId, this);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+//        super.onCreate(savedInstanceState);
 
-            }
-        });
 
-        recyclerView = (RecyclerView) findViewById(R.id.messagesList);
-        linearLayoutManager = new LinearLayoutManager(this);
+        rv =(RecyclerView)findViewById(R.id.rv);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
 
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, 1);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(adapter);
+
+        adapter = new ChatListAdapter(this,mMessages);
+        rv.setAdapter(adapter);
+
+
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // NavUtils.navigateUpFromSameTask(this);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+    public void onClick(View v) {
+        EditText newMessageView = (EditText)findViewById(R.id.new_message);
+        String newMessage = newMessageView.getText().toString();
+        newMessageView.setText("");
+        Message msg = new Message();
+        msg.setDate(new Date());
+        msg.setText(newMessage);
+        msg.setSender(mSender);
+        if(mUtility.isNetworkAvailable(this))
+            MessageDataSource.saveMessage(msg, mConvoId);
+        else
+        {
+            CharSequence text = "The message will be sent when the internet connection is back";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+            MessageDataSource.saveMessage(msg, mConvoId);
+        }
+    }
+
+    @Override
+    public void onMessageAdded(Message message) {
+        mMessages.add(message);
+        //rv.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MessageDataSource.stop(mListener);
+    }
+
 }
