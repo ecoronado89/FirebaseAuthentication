@@ -24,13 +24,17 @@
         android:text="Image:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tit_image"
+        android:id="@id/tit_image"
         android:fontFamily="sans-serif"
         android:textStyle="normal|bold"
         android:textAllCaps="true"
         />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@id/imUser"/>
 
-    <TextView
+  <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

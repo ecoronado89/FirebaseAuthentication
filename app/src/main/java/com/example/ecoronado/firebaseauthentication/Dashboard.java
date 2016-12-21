@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.ecoronado.firebaseauthentication.usuarios.Constants;
 import com.example.ecoronado.firebaseauthentication.usuarios.Info;
@@ -37,6 +38,7 @@ public class Dashboard extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private Intent intent;
+    private ImageView iUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class Dashboard extends AppCompatActivity {
         user = FirebaseAuth.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         infoChat = new InfoChat();
+        iUser = (ImageView)findViewById(R.id.imUser);
 
         databaseUser = FirebaseDatabase.getInstance().getReference("Users").child(mUser.getUid());
 
@@ -71,6 +74,7 @@ public class Dashboard extends AppCompatActivity {
         adapter = new InfoAdapter(this, infos, new InfoAdapter.OnItemClickListener(){
             @Override public void onItemClick(Info info) {
                 intent = new Intent(adapter.getContext(), Chat.class);
+
 
                 Log.i("info","+++++++++++++++ONCLICK");
                     System.out.println("IMAGE = " + info.getImage());

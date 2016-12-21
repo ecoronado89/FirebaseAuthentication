@@ -53,19 +53,21 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoHolder>{
     public static class InfoHolder extends RecyclerView.ViewHolder {
         public TextView tvImage;
         public TextView tvUsername;
+        private ImageView iUser;
 
 
         public InfoHolder(View infoView) {
             super(infoView);
             tvImage = (TextView) itemView.findViewById(R.id.txt_image);
             tvUsername = (TextView) itemView.findViewById(R.id.txt_username);
+            iUser = (ImageView)itemView.findViewById(R.id.imUser);
         }
 
         public void bind(final Info info, final OnItemClickListener listener) {
             tvImage.setText(info.getImage());
             tvUsername.setText(info.getUsername());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(    new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     listener.onItemClick(info);
                 }
