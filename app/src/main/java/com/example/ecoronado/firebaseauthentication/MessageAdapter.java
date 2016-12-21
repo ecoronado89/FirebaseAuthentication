@@ -2,6 +2,7 @@ package com.example.ecoronado.firebaseauthentication;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         public MessageHolder(View infoView) {
             super(infoView);
             txt_message = (TextView) itemView.findViewById(R.id.txt_message);
+            txt_message.setGravity(Gravity.LEFT);
 
         }
     }

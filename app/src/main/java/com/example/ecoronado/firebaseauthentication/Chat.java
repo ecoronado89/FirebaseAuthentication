@@ -34,8 +34,8 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
     private ListView mListView;
     private String mConvoId;
     private MessageDataSource.MessagesListener mListener;
-    private String mSender = "Didier"; // Replace these values to the correct ones
-    private String mRecipient = "Eder";
+    private String mSender = "Eder"; // Replace these values to the correct ones
+    private String mRecipient = "Didier";
     ChatListAdapter adapter;
 
     RecyclerView rv;
@@ -56,9 +56,15 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
 
+        if(mSender.compareTo(mRecipient) > 0){
+            String exchangeValue = mSender;
+            mSender= mRecipient;
+            mRecipient = exchangeValue;
+        }
 
         // define this order base on alphabetic to keep the consistensy across the devices
-        String[] ids = {mRecipient,"-", mSender};
+      //  String[] ids = {mRecipient,"-", mSender};
+        String[] ids = {mSender,"-", mRecipient};
         Arrays.sort(ids);
         mConvoId = ids[0]+ids[1]+ids[2];
 
@@ -73,7 +79,7 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
         rv.setLayoutManager(llm);
 
 
-        adapter = new ChatListAdapter(this,mMessages);
+        adapter = new ChatListAdapter(this,mMessages, mSender);
         rv.setAdapter(adapter);
 
 

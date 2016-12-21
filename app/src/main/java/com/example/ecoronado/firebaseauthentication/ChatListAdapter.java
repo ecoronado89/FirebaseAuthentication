@@ -1,11 +1,15 @@
 package com.example.ecoronado.firebaseauthentication;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,15 +22,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
     ArrayList<Message> messages;
 
     Context mContext;
+    String mSender;
 
     /*ChatListAdapter(Context context, ArrayList messages){
         this.messages = messages;
         this.mContext = context;
     }
 */
-    public ChatListAdapter(Context context, ArrayList<Message> mMessages) {
+    public ChatListAdapter(Context context, ArrayList<Message> mMessages, String sender) {
         this.messages = mMessages;
         this.mContext = context;
+        this.mSender = sender;
     }
 
     @Override
@@ -40,6 +46,21 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
     @Override
     public void onBindViewHolder(ChatViewHolder holder, int position) {
         holder.personAge.setText(messages.get(position).getText());
+        if(messages.get(position).getSender().equalsIgnoreCase(mSender))
+        {
+
+            RelativeLayout.LayoutParams params =
+                    new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+            holder.personAge.setTextColor(Color.RED);
+            holder.personAge.setTypeface(null, Typeface.BOLD);
+            holder.personAge.setLayoutParams(params);
+        }
+        else{
+            holder.personAge.setTextColor(Color.GRAY);
+            holder.personAge.setTypeface(null, Typeface.BOLD_ITALIC);
+        }
     }
 
     @Override
@@ -54,9 +75,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        // TODO
         TextView personAge;
-
 
         ChatViewHolder(View itemView) {
             super(itemView);
