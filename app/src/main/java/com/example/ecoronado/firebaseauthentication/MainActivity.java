@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             } else {
                                 //TODO add validation if the username has been already set
-                                Intent intent = new Intent(MainActivity.this, Profile.class);
+                                Intent intent = new Intent(MainActivity.this, Dashboard.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);

@@ -1,5 +1,6 @@
 package com.example.ecoronado.firebaseauthentication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +28,8 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseUsers;
 
+    private ProgressDialog mProgress;
+
     Snackbar snackbar;
 
     @Override
@@ -43,18 +47,23 @@ public class SignUp extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        mProgress = new ProgressDialog(this);
 
 
                 btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userId = mAuth.getCurrentUser().getUid();
-                signUpUser(input_email.getText().toString(), input_pass.getText().toString(), userId);
+                //String userId = mAuth.getCurrentUser().getUid();
+                signUpUser(input_email.getText().toString(), input_pass.getText().toString());
             }
         });
     }
 
-    private void signUpUser(String email, String pass, String userId) {
+    private void signUpUser(String email, String pass) {
+        final String name = input_name.getText().toString().trim();
+
+        mProgress.setMessage("Signing up...");
+        mProgress.show();
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -64,12 +73,12 @@ public class SignUp extends AppCompatActivity {
                            snackbar.show();
                        }
                         else{
-                           snackbar = Snackbar.make(activity_sign_up, "Registration was success", Snackbar.LENGTH_SHORT);
-                           snackbar.show();
+                           String userId = mAuth.getCurrentUser().getUid();
+                           mDatabaseUsers.child(userId).child("username").setValue(name);
+                           startActivity(new Intent(SignUp.this, MainActivity.class));
                        }
 
                     }
                 });
-        startActivity(new Intent(SignUp.this, MainActivity.class));
     }
 }
