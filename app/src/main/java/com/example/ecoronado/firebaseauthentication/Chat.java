@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ecoronado.firebaseauthentication.usuarios.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -30,13 +32,13 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
 
     private ArrayList<Message> mMessages;
     private Utility mUtility = new Utility();
-    private MessageAdapter mAdapter;
-    private ListView mListView;
     private String mConvoId;
     private MessageDataSource.MessagesListener mListener;
     private String mSender = "Eder"; // Replace these values to the correct ones
     private String mRecipient = "Didier";
     ChatListAdapter adapter;
+    private Bundle bundle;
+    private InfoChat infoChat;
 
     RecyclerView rv;
     @Override
@@ -44,18 +46,18 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_list_activity);
 
-        // Handle menu icon
-     //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-
-        //  mListView = (ListView)findViewById(R.id.messages_list);
         mMessages = new ArrayList<>();
-        //   mAdapter = new MessagesAdapter(mMessages);
-        // mListView.setAdapter(mAdapter);
 
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
 
+        bundle = getIntent().getExtras();
+        infoChat = bundle.getParcelable(com.example.ecoronado.firebaseauthentication.usuarios.Constants.INFO_CHAT);
+
+        mRecipient = infoChat.getReceiver();
+        mSender = infoChat.getSender();
+
+        // order the values alphabetically
         if(mSender.compareTo(mRecipient) > 0){
             String exchangeValue = mSender;
             mSender= mRecipient;
@@ -70,9 +72,6 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
 
         mListener = MessageDataSource.addMessagesListener(mConvoId, this);
 
-//        super.onCreate(savedInstanceState);
-
-
         rv =(RecyclerView)findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -81,8 +80,6 @@ public class Chat extends AppCompatActivity implements View.OnClickListener,
 
         adapter = new ChatListAdapter(this,mMessages, mSender);
         rv.setAdapter(adapter);
-
-
     }
 
     @Override
