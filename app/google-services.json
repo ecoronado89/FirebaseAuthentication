@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "726169475395-cpqrhfoif6rkasvsj2dsdjt4jukfn38o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecoronado.firebaseauthentication",
+            "certificate_hash": "F2B3FB208D0454BBCEEFCE5CCBC18E2D5BE368F0"
+          }
+        },
+        {
           "client_id": "726169475395-inb5f7nrshikcsvaski6t7gv8flu6kr8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

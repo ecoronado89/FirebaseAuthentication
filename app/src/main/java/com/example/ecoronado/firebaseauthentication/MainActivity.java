@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout activity_main;
 
     private FirebaseAuth auth;
+    private DatabaseReference databaseUser;
+    private StorageReference storageImage;
 
 
 
@@ -46,9 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnForgotPass.setOnClickListener(this);
 
         auth = FirebaseAuth.getInstance();
-        if(auth.getCurrentUser() != null){
-            startActivity(new Intent(MainActivity.this, Dashboard.class));
-        }
+        databaseUser = FirebaseDatabase.getInstance().getReference().child("Users");
+
+       /* if(auth.getCurrentUser() != null){
+            startActivity(new Intent(MainActivity.this, Profile.class));
+        }*/
+
+        //databaseUser.child(auth.getCurrentUser().getUid()).child("image").setValue("default");
     }
 
     @Override
@@ -81,11 +90,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
                                 if (password.length() < 6) {
-                                    Snackbar snackBar = Snackbar.make(activity_main, "Password length must be over 6", Snackbar.LENGTH_SHORT);
-                                    snackBar.show();
+                                    /*Snackbar snackBar = Snackbar.make(activity_main, "Password length must be over 6", Snackbar.LENGTH_SHORT);
+                                    snackBar.show();*/
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setMessage(task.getException().getMessage())
+                                            .setTitle(R.string.login_error_title)
+                                            .setPositiveButton(android.R.string.ok, null);
+                                    AlertDialog dialog  = builder.create();
+                                    dialog.show();
                                 }
                             } else {
-                                startActivity(new Intent(MainActivity.this, Dashboard.class));
+                                //TODO add validation if the username has been already set
+                                Intent intent = new Intent(MainActivity.this, Profile.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                             }
                         }
                     });

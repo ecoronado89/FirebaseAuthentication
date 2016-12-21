@@ -3,15 +3,21 @@
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="login">Login</string>
+    <string name="submit">Submit</string>
     <string name="forgot_pass">Forgot password ?</string>
     <string name="OR">OR</string>
     <string name="sign_up">Sign Up</string>
     <string name="register">Register</string>
-    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_name">Enter your username</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="signup_error_message">Please make sure you enter an user and password!</string>
     <string name="signup_error_title">Error!</string>
     <string name="signup_success">Account successfully created! You can now Login.</string>
     <string name="login_error_message">Please make sure you enter an email address and password!</string>
     <string name="login_error_title">Error!</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="forgot_message">We just need your registered email to send your password reset instructions</string>
+    <string name="forgot_input">Enter your email</string>
+    <string name="send_email">Reset password</string>
+    <string name="back">Back</string>
 </resources>
